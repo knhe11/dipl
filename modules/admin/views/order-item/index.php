@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modelsSearch\OrderItem */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order Items';
+$this->title = 'Добавление новых деталей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-item-index">
