@@ -18,17 +18,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -62,7 +51,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect('/site/login');
+            return $this->redirect(['/site/login']);
         }
         return $this->render('index');
     }
@@ -101,31 +90,17 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
     public function actionContact()
     {
-        $model = new ContactForm();
+        $model = new ContactForm;
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+            Yii::app()->user->setFlash('success', 'Данные успешно отправлены.');
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+
+        if ($model->hasErrors())
+            Yii::app()->user->setFlash('dangers', Html::errorSummary($model));
+
+        return $this->render('contact',['model' => $model]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }

@@ -6,50 +6,29 @@ use yii\helpers\Html;
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+<div class="col-lg-12">
+        <div class="headinf">
+            <div class="jumbotron">
+                <h1>Оптимизатор раскроя</h1>
+                <p class="lead">Приложение расчитывает оптимальный раскрой листового материала</p>
+            </div>
+        </div>  
+        <div class="body-content">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2 align="center">Рабочее меню</h2>
+                        <p><?=Html::a('Перейти в редактор формата',['/admin/format-list/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px']);?></p>
+                        <p><?=Html::a('Список заявок на раскрой',['/admin/order-item/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p>            
+                        <p><?=Html::a('Создать заявку на раскрой',['/admin/order/create'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p> 
+                        <p><?=Html::a('Удалить выбранную заявку',['/admin/order/create'],['class'=>'btn btn-success btn-sm btn-block','style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p>      
+                </div>
+                <div class="col-lg-9">
+                    <h2 align="center">Список заявок</h2>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Рабочее меню</h2>
-                <div class="navbar">
-                    <ul class='nav nav-pills nav-stacked'>
-                        <li><?=Html::a('Список форматов',['/admin/format-list/index']);?></li>
-                        <li><?=Html::a('Список заказов',['/admin/order/index']);?></li>
-                        <li><?=Html::a('Создать заказ',['/admin/order/create']);?></li>
-                    </ul> 
+                    
                 </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
         </div>
-
-    </div>
 </div>
