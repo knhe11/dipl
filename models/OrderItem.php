@@ -12,6 +12,8 @@ use Yii;
  * @property int $width_item Ширина детали
  * @property int $height_item Длина детали
  * @property int $count_item Кол-во
+ *
+ * @property OrderList $order
  */
 class OrderItem extends \yii\db\ActiveRecord
 {
@@ -31,6 +33,7 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             [['id_order', 'width_item', 'height_item', 'count_item'], 'required'],
             [['id_order', 'width_item', 'height_item', 'count_item'], 'integer'],
+            [['id_order'], 'exist', 'skipOnError' => true, 'targetClass' => OrderList::className(), 'targetAttribute' => ['id_order' => 'id']],
         ];
     }
 
@@ -46,5 +49,13 @@ class OrderItem extends \yii\db\ActiveRecord
             'height_item' => 'Длина детали',
             'count_item' => 'Кол-во',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrder()
+    {
+        return $this->hasOne(OrderList::className(), ['id' => 'id_order']);
     }
 }

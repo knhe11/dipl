@@ -18,7 +18,7 @@ class m180421_155134_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
         // таблица форматов
-        $this->createTable('{{format_list}}',[
+        $this->createTable('{{%format_list}}',[
             'id' => $this->primaryKey(),
             'width_list' => $this->integer(11)->notNull()->comment('Ширина'),
             'height_list' => $this->integer(11)->notNull()->comment('Длина'),
@@ -26,7 +26,7 @@ class m180421_155134_init extends Migration
         ],
         $tableOptions);
         // таблица заказы
-        $this->createTable('{{order_list}}',[
+        $this->createTable('{{%order_list}}',[
             'id' => $this->primaryKey(),
             'id_format_list' => $this->integer(11)->notNull()->comment('Формат листа'),
             'count_list' => $this->integer(11)->null()->comment('Кол-во листов'),
@@ -37,7 +37,7 @@ class m180421_155134_init extends Migration
         $tableOptions);
 
         //таблица заказы
-        $this->createTable('{{order_item}}',[
+        $this->createTable('{{%order_item}}',[
             'id' => $this->primaryKey(),
             'id_order' => $this->integer(11)->notNull()->comment('Заказ'),
             'width_item' => $this->integer(11)->notNull()->comment('Ширина детали'),
@@ -52,9 +52,9 @@ class m180421_155134_init extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{format_list}}');
-        $this->dropTable('{{order_list}}');
-        $this->dropTable('{{order_item}}');
+        $this->dropTable('{{%format_list}}');
+        $this->dropTable('{{%order_list}}');
+        $this->dropTable('{{%order_item}}');
     }
 
 }

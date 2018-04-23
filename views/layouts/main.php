@@ -38,20 +38,28 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Форматы листов', 'url' => ['/admin/format-list/index']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Заказы', 'url' => ['/order/index']],
+            [
+                'label' => 'Администрирование',
+                'url' => '#',
+                'items' => [
+                    ['label' => 'Роли', 'url' => ['/user/rbac/index']],
+                    ['label' => 'Пользователи', 'url' => ['/user/admin/index']],
+                ],
+            ],
+
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Вход', 'url' => ['/login']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Выход (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+                [
+                    'label' => 'Выход ' . Yii::$app->user->identity->username,
+                    'url' => ['/logout'],
+                    'options' => [
+                        'data-method' => 'POST',
+                    ],
+                ]
             )
         ],
     ]);
@@ -69,7 +77,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Компания <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

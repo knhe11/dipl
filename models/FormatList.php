@@ -45,4 +45,25 @@ class FormatList extends \yii\db\ActiveRecord
             'width_disk' => 'Ширина диска',
         ];
     }
+
+    public static function getLimitParams()
+    {
+        $maxHeight = self::find()->orderBy('height_list DESC')->one();
+        $maxWidth = self::find()->orderBy('width_list DESC')->one();
+
+        if ($maxHeight && $maxWidth) {
+            return [
+                'maxHeight' => [
+                    'width' => $maxHeight->width_list,
+                    'height' => $maxHeight->height_list,
+                ],
+                'maxWidth' => [
+                    'width' => $maxWidth->width_list,
+                    'height' => $maxWidth->height_list,
+                ],
+            ];
+        } else {
+            return false;
+        }
+    }
 }
