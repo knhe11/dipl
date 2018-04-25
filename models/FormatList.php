@@ -28,8 +28,8 @@ class FormatList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['width_list', 'height_list', 'width_disk'], 'required'],
-            [['width_list', 'height_list', 'width_disk'], 'integer'],
+            [['width_list', 'height_list', 'width_disk', 'edge_plate'], 'required'],
+            [['width_list', 'height_list', 'width_disk', 'edge_plate'], 'integer'],
         ];
     }
 
@@ -43,6 +43,7 @@ class FormatList extends \yii\db\ActiveRecord
             'height_list' => 'Длина',
             'width_list' => 'Ширина',
             'width_disk' => 'Ширина диска',
+            'edge_plate' => 'Кромка листа',
         ];
     }
 
