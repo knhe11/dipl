@@ -26,8 +26,8 @@ $this->registerJs($script, yii\web\View::POS_END);
     <table id="items-forms" class="table table-bordered">
         <thead>
             <tr>
-                <th>Ширина</th>
                 <th>Длина</th>
+                <th>Ширина</th>
                 <th>Кол-во</th>
                 <th>Действие</th>
             </tr>

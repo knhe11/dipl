@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'id_format_list',
                     'label' => 'Формат листа',
                     'format' => 'html',
-                    'value' => function($data) {return $data->formatList->width_list . ' x ' . $data->formatList->height_list . '(' . $data->formatList->width_disk . ')';},
+                    'value' => function($data) {return $data->formatList->height_list . ' x ' . $data->formatList->width_list . '(' . $data->formatList->width_disk . ')';},
                 ],
                 [
                     'attribute' => 'count_list',

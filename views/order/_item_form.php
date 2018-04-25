@@ -9,17 +9,18 @@ use yii\helpers\Html;
 
     <tr>
         <td>
-            <?=Html::activeTextInput($model,'width_item[]',[
-                'class' => 'form-control',
-                'data-width' => true,
-            ])?>
-        </td>
-        <td>
             <?=Html::activeTextInput($model,'height_item[]',[
                 'class' => "form-control",
                 'data-height' => true,
             ]) ?>
         </td>
+        <td>
+            <?=Html::activeTextInput($model,'width_item[]',[
+                'class' => 'form-control',
+                'data-width' => true,
+            ])?>
+        </td>
+
         <td>
             <?=Html::activeTextInput($model,'count_item[]',[
                 'class' => "form-control",

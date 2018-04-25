@@ -40,8 +40,8 @@ class FormatList extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'width_list' => 'Ширина',
             'height_list' => 'Длина',
+            'width_list' => 'Ширина',
             'width_disk' => 'Ширина диска',
         ];
     }

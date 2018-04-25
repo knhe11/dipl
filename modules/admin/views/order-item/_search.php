@@ -19,9 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_order') ?>
 
-    <?= $form->field($model, 'width_item') ?>
-
     <?= $form->field($model, 'height_item') ?>
+
+    <?= $form->field($model,'width_item' ) ?>
 
     <?= $form->field($model, 'count_item') ?>
 

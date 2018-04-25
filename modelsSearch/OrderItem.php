@@ -18,7 +18,7 @@ class OrderItem extends OrderItemModel
     public function rules()
     {
         return [
-            [['id', 'id_order', 'width_item', 'height_item', 'count_item'], 'integer'],
+            [['id', 'id_order', 'height_item', 'width_item', 'count_item'], 'integer'],
         ];
     }
 
@@ -60,8 +60,8 @@ class OrderItem extends OrderItemModel
         $query->andFilterWhere([
             'id' => $this->id,
             'id_order' => $this->id_order,
-            'width_item' => $this->width_item,
             'height_item' => $this->height_item,
+            'width_item' => $this->width_item,
             'count_item' => $this->count_item,
         ]);
 

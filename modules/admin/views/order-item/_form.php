@@ -14,9 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_order')->textInput() ?>
 
-    <?= $form->field($model, 'width_item')->textInput() ?>
-
     <?= $form->field($model, 'height_item')->textInput() ?>
+
+    <?= $form->field($model,'width_item')->textInput() ?>
 
     <?= $form->field($model, 'count_item')->textInput() ?>
 

@@ -12,10 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'width_list')->textInput() ?>
-
     <?= $form->field($model, 'height_list')->textInput() ?>
-
+    <?= $form->field($model, 'width_list')->textInput() ?>
     <?= $form->field($model, 'width_disk')->textInput() ?>
 
     <div class="form-group">
