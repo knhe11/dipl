@@ -5,21 +5,22 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\FormatList;
 use app\modelsSearch\FormatList as FormatListSearch;
-use yii\web\Controller;
+use app\modules\admin\components\AdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * FormatListController implements the CRUD actions for FormatList model.
  */
-class FormatListController extends Controller
+class FormatListController extends AdminController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,6 +28,7 @@ class FormatListController extends Controller
                 ],
             ],
         ];
+        return ArrayHelper::merge($behaviors,parent::behaviors());
     }
 
     /**
@@ -45,19 +47,6 @@ class FormatListController extends Controller
     }
 
     /**
-     * Displays a single FormatList model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new FormatList model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -67,7 +56,7 @@ class FormatListController extends Controller
         $model = new FormatList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -87,7 +76,7 @@ class FormatListController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
