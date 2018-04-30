@@ -40,7 +40,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Форматы листов', 'url' => ['/admin/format-list/index']],
-            ['label' => 'Заказы', 'url' => ['/order/index']],
+            ['label' => 'Заявки', 'url' => ['/order/index']],
             [
                 'label' => 'Администрирование',
                 'url' => '#',

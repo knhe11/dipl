@@ -22,10 +22,11 @@ class m180421_155134_init extends Migration
             'id' => $this->primaryKey(),
             'width_list' => $this->integer(11)->notNull()->comment('Ширина'),
             'height_list' => $this->integer(11)->notNull()->comment('Длина'),
-            'width_disk' => $this->integer(2)->notNull()->comment('Ширина диска'),            
+            'width_disk' => $this->integer(2)->notNull()->comment('Ширина диска'),
+            'edge_plate' => $this->integer(2)->notNull()->comment('Кромка листа'),
         ],
         $tableOptions);
-        // таблица заказы
+        // таблица заявки
         $this->createTable('{{%order_list}}',[
             'id' => $this->primaryKey(),
             'id_format_list' => $this->integer(11)->notNull()->comment('Формат листа'),
@@ -36,10 +37,10 @@ class m180421_155134_init extends Migration
         ],
         $tableOptions);
 
-        //таблица заказы
+        //таблица деталей
         $this->createTable('{{%order_item}}',[
             'id' => $this->primaryKey(),
-            'id_order' => $this->integer(11)->notNull()->comment('Заказ'),
+            'id_order' => $this->integer(11)->notNull()->comment('Заявка'),
             'width_item' => $this->integer(11)->notNull()->comment('Ширина детали'),
             'height_item' => $this->integer(11)->notNull()->comment('Длина детали'),          
             'count_item' => $this->integer(11)->notNull()->comment('Кол-во'),

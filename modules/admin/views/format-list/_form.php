@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'height_list')->textInput() ?>
     <?= $form->field($model, 'width_list')->textInput() ?>
     <?= $form->field($model, 'width_disk')->textInput() ?>
+    <?= $form->field($model, 'edge_plate')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

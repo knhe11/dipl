@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'width_list',
             'height_list',
             'width_disk',
+            'edge_plate',
         ],
     ]) ?>
 

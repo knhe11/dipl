@@ -20,11 +20,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'width_list') ?>
-
     <?= $form->field($model, 'height_list') ?>
 
+    <?= $form->field($model, 'width_list') ?>
+
     <?= $form->field($model, 'width_disk') ?>
+
+    <?= $form->field($model, 'edge_plate') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

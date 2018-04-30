@@ -62,6 +62,7 @@ class FormatList extends FormatListModel
             'width_list' => $this->width_list,
             'height_list' => $this->height_list,
             'width_disk' => $this->width_disk,
+            'edge_plate' => $this->edge_plate,
         ]);
 
         return $dataProvider;
