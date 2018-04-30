@@ -37,17 +37,6 @@ body {
     padding: 14px 24px;
 
 }
-.jumbotron-r {
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 15px;
-    font-weight: 200;
-    line-height: 2.1428571435;
-    color: inherit;
-    background-color: #7aba7b;
-    text-align: center;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 
 .jumbotron-reed {
 padding: 10px;
@@ -65,7 +54,6 @@ padding: 10px;
 
     font-size: 35px;
 }
-
 
 .navbar-brand {
     padding: 0;
@@ -324,6 +312,4 @@ padding: 10px;
     height: 1px;
     padding: 0;
 }
-ul {
-    color: red;
-}
+

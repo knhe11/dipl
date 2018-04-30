@@ -5,10 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\FormatList */
 
-$this->title = 'Update Format List: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Format Lists', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменние формата: ' . $model->height_list . ' ' . $model->width_list;
+$this->params['breadcrumbs'][] = ['label' => 'Список форматов', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="format-list-update">
 

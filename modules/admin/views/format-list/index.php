@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'width_disk',
             'edge_plate',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

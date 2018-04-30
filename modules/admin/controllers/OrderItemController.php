@@ -5,24 +5,25 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\OrderItem;
 use app\modelsSearch\OrderItem as OrderItemSearch;
-use yii\web\Controller;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\modules\admin\components\AdminController;
 
 
-
-class OrderItemController extends Controller
+class OrderItemController extends AdminController
 {
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
+        $behaviors = [
+        'verbs' => [
+            'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
         ];
+        return ArrayHelper::merge($behaviors,parent::behaviors());
     }
     public function actionIndex()
     {
