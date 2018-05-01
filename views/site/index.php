@@ -5,7 +5,7 @@ $this->registerCssFile('app/mystyle/stul');
 $this->registerCssFile('app/mystyle/navmenu');
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Оптимизатор раскроя';
 
 ?>
 <div class="col-lg-12">
@@ -13,20 +13,26 @@ $this->title = 'My Yii Application';
                 <h1>Оптимизатор раскроя</h1>
                 <p class="lead">Приложение расчитывает оптимальный раскрой листового материала</p>
             </div>
-  
-        <div class="body-content">
+         <div class="body-content">
 
             <div class="row">
                 <div class="col-lg-3">
                     <h2 align="center">Рабочее меню</h2>
-                        <p><?=Html::a('Перейти в редактор формата',['/admin/format-list/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px']);?></p>
-                        <p><?=Html::a('Список заявок на раскрой',['/order/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p>
+                        <p><?=Html::a('Редактор форматов листа',['/admin/format-list/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 7px; margin-bottom: 30px']);?></p>
                         <p><?=Html::a('Создать заявку на раскрой',['/order/create'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p>
+                        <p><?=Html::a('Список заявок на раскрой',['/order/index'],['class'=>'btn btn-success btn-sm btn-block', 'style'=>'padding-top: 16px; padding-bottom: 16px; font-size: 17px; margin-top: 30px; margin-bottom: 30px;']);?></p>
                 </div>
                 <div class="col-lg-9">
-                    <h2 align="center">Список заявок</h2>
+                    <h2 align="center">Краткая иснструкция</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">Для начала работы введите размеры, используемого формата листа. Для этого нажмите на кнопку "Перейти в редактор формата" и введите размеры, количество, ширину пильного диска и ширину срезки кромки.</li>
+                            <li class="list-group-item">После создания формата станет доступен расчет оптимального раскроя. Для расчета нажмите на кнопку "создать заявку на раскрой", а затем введите все размеры деталей для расчета и их количество, после нажатия на кнопку "Новая деталь". Убедитесь, что размер деталей меньше либо равен размеров формата листа, в противном случае будет выведено сообщение об ошибке с указанием неверных размеров детали.</li>
+                            <li class="list-group-item">При вводе неправильных символов или пропуске заполнения какого-нибудь поля, вам будет выведено сообщение о том, какое поле не заполненно или в каком поле введены неправильные значения.</li>
+                            <li class="list-group-item">Если все поля заполнены верно, то расчет раскроя осуществляется нажатием кнопки "Расчитать". Система определит наилучший вариант расскроя деталей и отобразит на странице "Раскрой". В случае, если КИМ окажется меньше 85%, то система предложит Вам ввести другие размеры деталей для уменьшения отходов производства. Но в любом случае будет доступно сохранение полученного раскроя.</li>
+                            <li class="list-group-item">Если расчет раскроя оказался подходящим, то карту раскроя с результатами расчета можно распчатать.</li>
+                            <li class="list-group-item">Весь список сохраненных расчетов находится в списке заявок на раскрой, для перехода к списку нажмите кнопку "Список заявок на раскрой". Параметры расчета в сохраненной заявке можно изменить и расчитать раскрой заново.</li>
+                        </ul>
 
-                    
                 </div>
             </div>
 

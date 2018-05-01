@@ -20,7 +20,7 @@ $this->registerJs($script, yii\web\View::POS_END);
 ?>
 <div class="row">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= Html::a('новая деталь',['/order/add-item'],['onclick' => 'addItem(this,event)','class' => 'btn btn-primary'])?>
+    <?= Html::a('Новая деталь',['/order/add-item'],['onclick' => 'addItem(this,event)','class' => 'btn btn-success'])?>
     <?php $form = ActiveForm::begin(['id' => 'new-order-form']); ?>
 <br/>
     <table id="items-forms" class="table table-bordered">

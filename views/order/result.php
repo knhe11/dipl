@@ -5,9 +5,9 @@ use yii\helpers\Html;
 <?php if(!empty($slab_data)):?>
     <h3>Детали:</h3>
     <?php foreach($orderItems as $item):?>
-        ширина - <?= $item[0]?><br/>
-        длина - <?= $item[1]?><br/>
-        кол-во - <?= $item[2]?><br/>
+        длина - <?= $item[1]?> мм.<br/>
+        ширина - <?= $item[0]?> мм.<br/>
+        кол-во - <?= $item[2]?> шт.<br/>
         <hr/>
     <?php endforeach;?>
     <h3>Результат расчета:</h3>
@@ -16,10 +16,10 @@ use yii\helpers\Html;
         <b>Параметры плиты : </b> <br/>
             длина - <?=$slab_data['height_list']?> мм.<br/>
             ширина - <?=$slab_data['width_list'] ?> мм.<br/>
-        <b>Кромка плиты : </b> <?=$slab_data['edge_plate']?>мм.<br/>
-        <b>Используется плит : </b><?=count($slab_data["pages"]);?><br/>
-        <b>КИМ : </b><?=$slab_data["kim"];?><br/>
 
+        <b>Кромка плиты : </b> <?=$slab_data['edge_plate']?>мм.<br/>
+        <b>Используется плит : </b><?=count($slab_data["pages"]);?> шт.<br/>
+        <b>КИМ : </b><?=$slab_data["kim"];?><br/>
             <?php foreach ($slab_data["pages"] as $num_page => $page):?>
                 <?php if (isset($slab_data['id_order'])):?>
                     <?=Html::a('Страница №' . ($num_page+1),
@@ -34,9 +34,9 @@ use yii\helpers\Html;
                 <?php endif;?>
 
                 <?php foreach($page as $row_num => $row):?>
-                    Строка № <?=$row_num+1?><br/>
+                    Уровень № <?=$row_num+1?><br/>
                     <?php foreach($row['elements'] as $el_num => $element):?>
-                        Элемент <?=$el_num+1?>: <?=$element['width'] . 'x' . $element['height'];?><br/>
+                        Элемент <?=$el_num+1?>: <?=$element['height'] .'x' . $element['width'];?> мм.<br/>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
                 <br/>
