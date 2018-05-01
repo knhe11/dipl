@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\FormatList */
 
 $this->title = 'Новый формат листа';
-$this->params['breadcrumbs'][] = ['label' => 'Список форматов', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Редактор форматов листа', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="format-list-create">

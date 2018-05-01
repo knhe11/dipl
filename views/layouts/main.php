@@ -39,8 +39,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Форматы листов', 'url' => ['/admin/format-list/index']],
-            ['label' => 'Заявки', 'url' => ['/order/index']],
+            ['label' => 'Редактор форматов листа', 'url' => ['/admin/format-list/index']],
+            ['label' => 'Список заявок', 'url' => ['/order/index']],
             [
                 'label' => 'Администрирование',
                 'url' => '#',

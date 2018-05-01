@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modelsSearch\FormatList */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Список форматов';
+$this->title = 'Редактор форматов листа';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="format-list-index">
