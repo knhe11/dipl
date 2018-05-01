@@ -7,7 +7,7 @@ use yii\filters\AccessControl;
 use app\components\MainController;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
+use yii\helpers\Html;
 use app\models\ContactForm;
 
 class SiteController extends MainController
@@ -51,7 +51,7 @@ class SiteController extends MainController
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login']);
+            return $this->redirect(['/login']);
         }
         return $this->render('index');
     }
@@ -72,11 +72,11 @@ class SiteController extends MainController
     {
         $model = new ContactForm;
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::app()->user->setFlash('success', 'Данные успешно отправлены.');
+            Yii::$app->user->setFlash('success', 'Данные успешно отправлены.');
         }
 
         if ($model->hasErrors())
-            Yii::app()->user->setFlash('dangers', Html::errorSummary($model));
+            Yii::$app->user->setFlash('dangers', Html::errorSummary($model));
 
         return $this->render('contact',['model' => $model]);
     }

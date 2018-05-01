@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\models\FormatList;
 use Yii;
 use app\models\OrderItem;
-use app\modelsSearch\OrderItem as OrderItemSearch;
+use app\modelsSearch\OrderList as OrderListSearch;
 use app\components\MainController;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -44,7 +44,7 @@ class OrderController extends MainController
      */
     public function actionIndex()
     {
-        $searchModel = new OrderItemSearch();
+        $searchModel = new OrderListSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -67,13 +67,10 @@ class OrderController extends MainController
 
             $calc = new Calculation();
             $calc->detal = $orderItems;
-            $slabs_data = $calc->init();
-
-            // генерация карты
-            $images = Calculation::map($slabs_data);
+            $slab_data = $calc->init();
 
             return $this->render('result' , [
-                'slabs_data' => $slabs_data,
+                'slab_data' => $slab_data,
                 'orderItems' => $orderItems,
             ]);
 

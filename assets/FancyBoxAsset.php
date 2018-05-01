@@ -8,7 +8,6 @@
 namespace app\assets;
 
 use yii\web\AssetBundle;
-use yii\bootstrap\BootstrapAsset;
 
 /**
  * Main application asset bundle.
@@ -16,18 +15,17 @@ use yii\bootstrap\BootstrapAsset;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class FancyBoxAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@bower/fancybox/dist';
+
     public $css = [
-        'css/site.css',
+        'jquery.fancybox.min.css',
     ];
     public $js = [
-        'js/script.js',
+        'jquery.fancybox.min.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\web\JqueryAsset',
     ];
 }
