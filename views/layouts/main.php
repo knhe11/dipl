@@ -9,8 +9,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\assets\FancyBoxAsset;
 
 AppAsset::register($this);
+FancyBoxAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -54,7 +56,7 @@ AppAsset::register($this);
                 ['label' => 'Вход', 'url' => ['/login']]
             ) : (
                 [
-                    'label' => 'Выход ' . Yii::$app->user->identity->username,
+                    'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/logout'],
                     'options' => [
                         'data-method' => 'POST',

@@ -1,4 +1,8 @@
-<?php if(!empty($slabs_data)):?>
+<?php
+use yii\helpers\Html;
+?>
+
+<?php if(!empty($slab_data)):?>
     <h3>Детали:</h3>
     <?php foreach($orderItems as $item):?>
         длина - <?= $item[1]?> мм.<br/>
@@ -7,15 +11,27 @@
         <hr/>
     <?php endforeach;?>
     <h3>Результат расчета:</h3>
-    <?php foreach ($slabs_data as $slab_data):?>
+
         <b>Используем плиту : </b> ID - <?=$slab_data['id'] ?><br/>
         <b>Параметры плиты : </b> <br/>
             длина - <?=$slab_data['height_list']?> мм.<br/>
             ширина - <?=$slab_data['width_list'] ?> мм.<br/>
-        <b>Кромка плиты : </b> <?=$slab_data['edge_plate']?> мм.<br/>
+
+        <b>Кромка плиты : </b> <?=$slab_data['edge_plate']?>мм.<br/>
         <b>Используется плит : </b><?=count($slab_data["pages"]);?> шт.<br/>
+        <b>КИМ : </b><?=$slab_data["kim"];?><br/>
             <?php foreach ($slab_data["pages"] as $num_page => $page):?>
-                Страница №<?=$num_page+1?>:<br/>
+                <?php if (isset($slab_data['id_order'])):?>
+                    <?=Html::a('Страница №' . ($num_page+1),
+                        ['/uploads/'.$slab_data['id_order'] . '_page_' . $num_page . '.png'],
+                        [
+//                            'target' => '_blank',
+                            'class' => 'prev',
+                            'data-fancybox' => 'gallery',
+                        ])?>:<br/>
+                <?php else: ?>
+                    Страница № <?=$num_page+1?>
+                <?php endif;?>
 
                 <?php foreach($page as $row_num => $row):?>
                     Уровень № <?=$row_num+1?><br/>
@@ -27,7 +43,7 @@
             <?php endforeach; ?>
         <br/>
         <hr/>
-    <?php endforeach; ?>
+
 <?php else:?>
     <div class="alert alert-danger" role="alert">Плиты под заданные части не найдены.</div>
 <?php endif;?>

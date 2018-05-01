@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'options' => [
                         'width' => '80',
                     ],
-                    'value' => function($data) {return '#' . $data;},
+                    'value' => function($data) {return '#' . $data->id;},
                 ],
                 [
                     'attribute' => 'id_format_list',
