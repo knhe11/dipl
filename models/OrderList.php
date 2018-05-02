@@ -106,4 +106,16 @@ class OrderList extends \yii\db\ActiveRecord
         foreach ($files as $file)
             @unlink($file);
     }
+
+    public function getImagePages()
+    {
+        $path = Yii::getAlias('@webroot/uploads/');
+        $files = FileHelper::findFiles($path,[
+            'only'=>[$this->id . '_page_*.png']
+        ]);
+        $files_url = [];
+        foreach($files as $file)
+            $files_url[] = Yii::getAlias('@web/uploads/') . basename($file);
+        return $files_url;
+    }
 }

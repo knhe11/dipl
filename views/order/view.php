@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model app\models\OrderList */
+
+use yii\helpers\Html;
 ?>
 
 <h1>Заявка №<?=$model->id?></h1>
@@ -30,3 +32,23 @@
 </table>
 
 <h3>Детали</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>Ширина детали</th>
+        <th>Длина детали</th>
+        <th>Кол-во</th>
+    </tr>
+    <?php foreach($model->orderItems as $item):?>
+        <tr>
+            <td><?=$item->width_item?></td>
+            <td><?=$item->height_item?></td>
+            <td><?=$item->count_item?></td>
+        </tr>
+    <?php endforeach;?>
+</table>
+<div class="page-break"></div>
+<h3>Карты раскроя</h3>
+<?php foreach($model->imagePages as $key => $image){
+    echo Html::img($image,['class' => 'img-thumbnail']).'<br/><div class="page-break"></div>';
+    //echo Html::a('Страница #'.$key,$image,['data-fancybox' => 'gallery',]) . '<br/>';
+}?>

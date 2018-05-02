@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'NoName009@ya.ru',
+    'min_kim' => 80, // предупреждение нерационального использования материала
+    'supportEmail' => 'NoName009@ya.ru', // мыло administrator
 ];

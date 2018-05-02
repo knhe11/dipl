@@ -3,6 +3,12 @@ use yii\helpers\Html;
 ?>
 
 <?php if(!empty($slab_data)):?>
+    <?php if($slab_data["kim"] < Yii::$app->params['min_kim']):?>
+        <div class="alert alert-danger" role="alert">
+            КИМ составляет менее 85%, рекомендуем изменить размеры деталей.
+        </div>
+    <?php endif;?>
+
     <h3>Детали:</h3>
     <?php foreach($orderItems as $item):?>
         длина - <?= $item[1]?> мм.<br/>

@@ -60,9 +60,8 @@ class Calculation
             ->all();
 
         $slabs_data = [];
-
+//var_dump($slabs);exit;
         foreach($slabs as $slab) {
-
             $rows_element = [];
             $num_row = 0;
             $_elements = $elements;
@@ -71,7 +70,9 @@ class Calculation
                 $rows_element[$num_row]['max_height'] = 0;
                 $avaliby_width = $slab->width_list - 2 * $slab->edge_plate;
                 foreach ($_elements as $num_el => $element) {
-                    $avaliby_width = $avaliby_width - $element['width'] - $slab->width_disk;
+                    $avaliby_width = $avaliby_width - $element['width'];
+                    if(!empty($rows_element[$num_row]['elements']))
+                        $avaliby_width = $avaliby_width - $slab->width_disk;
                     if ($avaliby_width >= 0) {
                         $rows_element[$num_row]['elements'][] = $element;
                         $rows_element[$num_row]['row_width'] = $rows_element[$num_row]['row_width'] + $element['width'];
@@ -84,7 +85,6 @@ class Calculation
                 }
                 $num_row++;
             }
-
             $slabs_data[$slab->id] = [
                 'id' => $slab->id,
                 'width_disk' => $slab->width_disk,
@@ -103,7 +103,7 @@ class Calculation
             while (!empty($rows)) {
                 $avaliby_height = $slab_data['height_list'] - 2 * $slab_data['edge_plate'];
                 foreach ($rows as $num_row => $row){
-                    if ($avaliby_height > $row['max_height']) {
+                    if ($avaliby_height >= $row['max_height']) {
                         $avaliby_height = $avaliby_height - $row['max_height'];
                         $pages[$num_page][] = $row;
                         unset($rows[$num_row]);
@@ -114,7 +114,7 @@ class Calculation
             // расчет полезного коэффициента
             $slabs_data[$id_format_list]['kim'] = round($area_elements/($num_page * $slab_data['height_list'] * $slab_data['width_list']) * 100,2);
             // ищем у кого низкий КИМ
-            if(!isset($kim) ||  ($kim > $slabs_data[$id_format_list]['kim'])) {
+            if(!isset($kim) ||  ($kim < $slabs_data[$id_format_list]['kim'])) {
                 $kim = $slabs_data[$id_format_list]['kim'];
                 $nummin_kim = $id_format_list;
             }

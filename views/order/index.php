@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin()?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+//            'filterModel' => $searchModel,
             'columns' => [
                 //['class' => 'yii\grid\SerialColumn'],
 
@@ -45,14 +45,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'count_list',
                     'label' => 'Кол-во листов',
                 ],
-
                 [
                     'attribute' => 'kim',
                     'label' => 'КИМ %',
                 ],
                 [
+                    'attribute' => 'created_by',
+                    'value' => function($data){return $data->creater->username;},
+                    'filter' => false,
+                ],
+                [
+                    'attribute' => 'created_at',
+                    'value' => function($data){return date('d.m.Y H:i',$data->created_at);}
+                ],
+
+                [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} {delete}',
+                    'template' => '{view} {delete}',
                 ],
             ],
         ]); ?>
