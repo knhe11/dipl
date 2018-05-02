@@ -67,4 +67,9 @@ class FormatList extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public function getNameFormatList()
+    {
+        return '#' . $this->id . ' / ' . $this->height_list . 'x' . $this->width_list . '('.$this->width_disk.')';
+    }
 }

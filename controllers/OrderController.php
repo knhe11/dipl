@@ -3,13 +3,14 @@
 namespace app\controllers;
 
 use app\models\FormatList;
+use app\models\OrderList;
 use Yii;
 use app\models\OrderItem;
 use app\modelsSearch\OrderList as OrderListSearch;
 use app\components\MainController;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
+//use yii\helpers\ArrayHelper;
+//use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\helpers\Json;
@@ -27,6 +28,16 @@ class OrderController extends MainController
                         'actions' => ['create','add-item'],
                         'allow' => true,
                         'roles' => ['orderCreate']
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['orderDelete']
+                    ],
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['orderViews']
                     ],
                     [
                         'actions' => ['index'],
@@ -90,9 +101,27 @@ class OrderController extends MainController
                 'form' => $form,
             ];
 
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('Запрошенная страница не существует.');
+    }
 
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
+
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('view',['model' => $model]);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = OrderList::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Запрошенная страница не существует.');
     }
 }

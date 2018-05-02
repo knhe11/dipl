@@ -30,4 +30,5 @@ class OrderItem extends \yii\db\ActiveRecord
     {
         return $this->hasOne(OrderList::className(), ['id' => 'id_order']);
     }
+
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "order_list".
@@ -79,5 +80,30 @@ class OrderList extends \yii\db\ActiveRecord
     public function getFormatList()
     {
         return $this->hasOne(FormatList::className(), ['id' => 'id_format_list']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreater()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    public function beforeDelete()
+    {
+        OrderItem::deleteAll(['id_order' => $this->id]);
+        $this->rmMap();
+        return parent::beforeDelete();
+    }
+
+    private function rmMap()
+    {
+        $path = Yii::getAlias('@webroot/uploads/');
+        $files = FileHelper::findFiles($path,[
+            'only'=>[$this->id . '_page_*.png']
+        ]);
+        foreach ($files as $file)
+            @unlink($file);
     }
 }

@@ -62,27 +62,27 @@ class Calculation
         $slabs_data = [];
 
         foreach($slabs as $slab) {
-            $work_width = $slab->width_list - 2 * $slab->edge_plate;
+
             $rows_element = [];
             $num_row = 0;
-            // формирование горизонтальных строк
-            foreach ($elements as $element){
-                if (!isset($rows_element[$num_row]['row_width'])) {
-                    $rows_element[$num_row]['row_width'] = $element['width'];
-                } else {
-                    $add_el_width = $rows_element[$num_row]['row_width'] + $slab->width_disk + $element['width'];
-                    // если есть превышение ширины плиты, то переходим на новую строку
-                    if ($add_el_width > $work_width) {
-                        $num_row++;
-                        $rows_element[$num_row]['row_width'] = $element['width'];
+            $_elements = $elements;
+            while (!empty($_elements)) {
+                $rows_element[$num_row]['row_width'] = 0;
+                $rows_element[$num_row]['max_height'] = 0;
+                $avaliby_width = $slab->width_list - 2 * $slab->edge_plate;
+                foreach ($_elements as $num_el => $element) {
+                    $avaliby_width = $avaliby_width - $element['width'] - $slab->width_disk;
+                    if ($avaliby_width >= 0) {
+                        $rows_element[$num_row]['elements'][] = $element;
+                        $rows_element[$num_row]['row_width'] = $rows_element[$num_row]['row_width'] + $element['width'];
+                        if ($rows_element[$num_row]['max_height'] < $element['height'])
+                            $rows_element[$num_row]['max_height'] = $element['height'];
+                        unset($_elements[$num_el]);
                     } else {
-                        $rows_element[$num_row]['row_width'] = $add_el_width;
+                        $avaliby_width = $avaliby_width + $element['width'];
                     }
                 }
-                if (!isset($rows_element[$num_row]['max_height'])) {
-                    $rows_element[$num_row]['max_height'] = $element['height'];
-                }
-                $rows_element[$num_row]['elements'][] = $element;
+                $num_row++;
             }
 
             $slabs_data[$slab->id] = [
@@ -94,6 +94,8 @@ class Calculation
                 'rows' => $rows_element,
             ];
         }
+
+//        var_dump(\yii\helpers\Json::encode($slabs_data));exit;
         // создаем массив страниц
         foreach ($slabs_data as $id_format_list => $slab_data) {
             $pages = [];
@@ -111,7 +113,7 @@ class Calculation
                 $num_page++;
             }
             // расчет полезного коэффициента
-            $slabs_data[$id_format_list]['kim'] = $num_page * $slab_data['height_list'] * $slab_data['width_list']  / $area_elements;
+            $slabs_data[$id_format_list]['kim'] = round($area_elements/($num_page * $slab_data['height_list'] * $slab_data['width_list']) * 100,2);
             // ищем у кого низкий КИМ
             if(!isset($kim) ||  ($kim > $slabs_data[$id_format_list]['kim'])) {
                 $kim = $slabs_data[$id_format_list]['kim'];
@@ -170,7 +172,7 @@ class Calculation
             $colorForegr       = imageColorAllocate($image, 255, 255, 255); // белый рабочая площадь
             $colorGrid         = imageColorAllocate($image, 0, 0, 0); // черный
             $colorCross        = imageColorAllocate($image, 0, 0, 0);
-            $colorPhysical     = imageColorAllocate($image, 0, 0, 255); // синий
+            $colorPhysical     = imageColorAllocate($image, 152, 251, 152); // салатовый
             $colorEmotional    = imageColorAllocate($image, 255, 0, 0); // красный
             $colorIntellectual = imageColorAllocate($image, 0, 255, 0); // зеленый
             // шрифт
@@ -179,18 +181,19 @@ class Calculation
             // заливаем цветом фона
             imageFilledRectangle($image, 0, 0, $diagramWidth, $diagramHeight, $colorBackgr);
             imageFilledRectangle($image, $params['edge_plate'], $params['edge_plate'], $diagramWidth - $params['edge_plate'], $diagramHeight - $params['edge_plate'], $colorForegr);
+            $start_y = $params['edge_plate'];
             // пробегаемся по строкам
             foreach ($page as $rows) {
                 $start_x = $params['edge_plate'];
                 // пробегаемся по элементам
                 foreach($rows['elements'] as $element) {
                     imageFilledRectangle($image, $start_x, $start_y, $start_x + $element['width'], $start_y + $element['height'], $colorPhysical);
+                    imagerectangle($image, $start_x, $start_y, $start_x + $element['width'], $start_y + $element['height'], $colorGrid);
                     // подпись текста
-                    imagefttext($image, 10, 0, $start_x + 2, $start_y + 15, $colorIntellectual, $font_file, $element['width'] . 'x' . $element['height']);
-
+                    imagefttext($image, 20, 0, $start_x + 2, $start_y + 30, $colorGrid, $font_file, $element['width'] . 'x' . $element['height']);
                     $start_x = $start_x + $element['width'] + $params['width_disk'];
                 }
-                $start_y = $rows['max_height'] + $params['width_disk'] + $params['edge_plate'];
+                $start_y = $start_y + $rows['max_height'] + $params['width_disk'];
             }
             if ($this->_id_order)
                 $path = Yii::getAlias('@webroot') . '/uploads/'.$this->_id_order.'_page_'.$key.'.png' ;

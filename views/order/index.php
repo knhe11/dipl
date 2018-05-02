@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'id_format_list',
                     'label' => 'Формат листа',
                     'format' => 'html',
-                    'value' => function($data) {return $data->formatList->height_list . ' x ' . $data->formatList->width_list . '(' . $data->formatList->width_disk . ')';},
+                    'value' => function($data) {return $data->formatList->nameFormatList;},
                 ],
                 [
                     'attribute' => 'count_list',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{update} {delete}',
+                    'template' => '{view} {update} {delete}',
                 ],
             ],
         ]); ?>
