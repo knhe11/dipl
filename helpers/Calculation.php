@@ -111,7 +111,7 @@ class Calculation
                 $num_page++;
             }
             // расчет полезного коэффициента
-            $slabs_data[$id_format_list]['kim'] = $num_page * $slab_data['height_list'] * $slab_data['width_list']  / $area_elements;
+            $slabs_data[$id_format_list]['kim'] =  round($area_elements/$num_page * $slab_data['height_list'] * $slab_data['width_list'] * 100 , 2);
             // ищем у кого низкий КИМ
             if(!isset($kim) ||  ($kim > $slabs_data[$id_format_list]['kim'])) {
                 $kim = $slabs_data[$id_format_list]['kim'];
