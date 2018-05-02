@@ -95,7 +95,6 @@ class Calculation
             ];
         }
 
-//        var_dump(\yii\helpers\Json::encode($slabs_data));exit;
         // создаем массив страниц
         foreach ($slabs_data as $id_format_list => $slab_data) {
             $pages = [];
@@ -201,10 +200,5 @@ class Calculation
                 $path = Yii::getAlias('@webroot') . '/uploads/tmp_'.$key.'.png' ;
             imagePNG($image,$path);
         }
-
-
-//        foreach ($this->_slabs_data as $slab_data) {
-
-//        }
     }
 }

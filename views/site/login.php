@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \budyaga\users\models\forms\LoginForm */
 
-$this->title = Yii::t('users', 'LOGIN');
+$this->title = 'Вход в систему';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -21,10 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput() ?>
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
             <div style="color:#999;margin:1em 0">
-                <?= Yii::t('users', 'YOU_CAN_RESET_PASSWORD', ['url' => Url::toRoute('/user/user/request-password-reset')])?>
+                <?=Html::a('Регистрация','/signup')?> &nbsp; | &nbsp;
+                <?=Html::a('Сбросить пароль','/user/user/request-password-reset')?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('users', 'LOGIN'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

@@ -23,11 +23,11 @@ $config = [
             'customViews' => [
                 'login' => '@app/views/site/login'
             ],
-//            'customMailViews' => [
-//                'confirmChangeEmail' => '@app/mail/confirmChangeEmail' //in this case you have to create files confirmChangeEmail-html.php and confirmChangeEmail-text.php in mail folder
-//            ],
-            'userPhotoUrl' => 'http://example.com/uploads/user/photo',
-            'userPhotoPath' => '@frontend/web/uploads/user/photo'
+            'customMailViews' => [
+                'confirmNewEmail' => '@app/mail/user/confirmNewEmail' //in this case you have to create files confirmChangeEmail-html.php and confirmChangeEmail-text.php in mail folder
+            ],
+            'userPhotoUrl' => '/uploads/user/photo',
+            'userPhotoPath' => '@webroot/uploads/user/photo'
         ],
     ],
 
@@ -120,11 +120,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                '<module>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
-                '<module>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
-                '<module>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-                '/signup' => '/user/user/signup',
-                '/login' => '/user/user/login',
+                '/signup' => '/site/signup',
+                '/login' => '/site/login',
                 '/logout' => '/user/user/logout',
                 '/requestPasswordReset' => '/user/user/request-password-reset',
                 '/resetPassword' => '/user/user/reset-password',
@@ -132,11 +129,27 @@ $config = [
                 '/retryConfirmEmail' => '/user/user/retry-confirm-email',
                 '/confirmEmail' => '/user/user/confirm-email',
                 '/unbind/<id:[\w\-]+>' => '/user/auth/unbind',
-                '/oauth/<authclient:[\w\-]+>' => '/user/auth/index'
+                '/oauth/<authclient:[\w\-]+>' => '/user/auth/index',
+
+                '<module>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
+                '<module>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
+                '<module>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
+        ],
+        'i18n' => [
+            'translations' => [
+                'users' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@budyaga/users/messages',
+                    'forceTranslation' => true,
+                    'fileMap' => [
+                        'users' => 'users.php'
+                    ]
+                ],
+            ],
         ],
     ],
     'params' => $params,

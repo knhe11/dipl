@@ -3,12 +3,15 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use app\components\MainController;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use app\models\ContactForm;
+use budyaga\users\models\forms\LoginForm;
+use app\models\forms\SignupForm;
+use yii\helpers\Url;
+use yii\filters\AccessControl;
 
 
 class SiteController extends MainController
@@ -19,6 +22,20 @@ class SiteController extends MainController
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login','signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -51,9 +68,6 @@ class SiteController extends MainController
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/login']);
-        }
         return $this->render('index');
     }
 
@@ -82,4 +96,46 @@ class SiteController extends MainController
         return $this->render('contact',['model' => $model]);
     }
 
+
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            $transaction = Yii::$app->db->beginTransaction();
+            if ($user = $model->signup()) {
+                if ($user->createEmailConfirmToken() && $user->sendEmailConfirmationMail(Yii::$app->getModule('user')->getCustomMailView('confirmNewEmail'), 'new_email')) {
+                    Yii::$app->getSession()->setFlash('success', 'Проверьте свой Email и следуйте инструкциям.');
+                    $transaction->commit();
+                    return $this->redirect(Url::toRoute('/login'));
+                } else {
+                    Yii::$app->getSession()->setFlash('error', 'Невозможно отправить сообщение на заданный Email.');
+                    $transaction->rollBack();
+                };
+            }
+            else {
+                Yii::$app->getSession()->setFlash('error', 'Во время добавления пользователя возникла ошибка');
+                $transaction->rollBack();
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
 }
